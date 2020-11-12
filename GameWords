@@ -1,0 +1,78 @@
+import random
+
+
+# функционал игры.
+def game(words, randWord):
+    flag = 0
+    word_game = randWord
+    # Флаг на победу.
+    while flag == 0:
+        print(word_game)
+        wordsEnd.append(word_game)
+        print("Your word!")
+        flag_word = 0
+        # Флаг на верное слово.
+        while flag_word == 0:
+            flag_find = 0
+            word = input()
+            # Проход по всем словам из заданной темы.
+            for i in words:
+                # Занижение регистра для сравнения слов и букв.
+                i.lower()
+                word = word.lower()
+                # Проверка, есть ли слово в списке и сходится ли первая буква с последней.
+                if word_game[-1] == word[0] and i == word:
+                    # Проверка, есть ли слово в списке пройденных слов.
+                    for j in wordsEnd:
+                        # Найденное слово выкидывает в начало
+                        if j == i:
+                            break
+                        # Добавляет в список подходящее слово и игра продолжается.
+                        else:
+                            flag_word = 1
+                            wordsEnd.append(word)
+                            # Проверка всех слов с пройденными и поиск подходящего.
+                            for k in words:
+                                # Флаг на найденное ботом слово.
+                                flag_notfind = 1
+                                for n in wordsEnd:
+                                    if k == n:
+                                        flag_notfind = 0
+                                if k[0] == word[-1] and flag_notfind == 1:
+                                    word_game = k
+                                    flag_find = 1
+                                    break
+                            if flag_find == 0:
+                                print("Ohh... I'm lose... By!")
+                                flag = 1
+                                flag_word = 1
+                                break
+                            break
+                    break
+            if flag_word == 0:
+                print("No! This word isn't true.")
+
+
+# Инициализация слов в темах.
+wordsAnimal = ["тигр", "кошка", "кот", "собака", "страус", "аист", "зубр", "дикобраз", "зебра", "жираф", "рыба"]
+wordsCountry = ["москва", "екатеренбург", "воронеж", "краснодар", "калининград", "ростов", "вороново", "орел"]
+wordsFruits = ["ананас", "салат", "мандарин", "апельсин", "помидор", "огурец", "цукини", "баклажан", "вишня", "яблоко"]
+# Список пройденных слов.
+wordsEnd = []
+# Приветствие.
+print("Hello, let's go play!")
+print("Choose theme:")
+print("1. Animal.")
+print("2. Country.")
+print("3. Plant.")
+# Выбор темы.
+choose = int(input())
+print("I'm starting!")
+if choose == 1:
+    game(wordsAnimal, random.choice(wordsAnimal))
+elif choose == 2:
+    game(wordsCountry, random.choice(wordsCountry))
+elif choose == 3:
+    game(wordsFruits, random.choice(wordsFruits))
+else:
+    game(wordsCountry, random.choice(wordsCountry))
